@@ -1,0 +1,31 @@
+:host {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.question-tree-invisible {
+    display: none;
+}
+
+.question-tree ul,
+.question-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+.linkId {
+    min-width: 25px;
+}
+
+.sub-title {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.radio-margin {
+    margin: 0 10px;
+}

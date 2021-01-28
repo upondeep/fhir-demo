@@ -1,0 +1,24 @@
+<nav fxFlex="none" fxLayout="row" class="topnav">
+    <ul fxFill fxLayout="row" fxLayoutGap="10px">
+        <li><a routerLink="/main" routerLinkActive="active">Main</a></li>
+        <li><a routerLink="/question" routerLinkActive="active">Questionnaire</a></li>
+    </ul>
+</nav>
+<div
+    fxFlex
+    fxLayout="row"
+    #mainContent>
+    <router-outlet> </router-outlet>
+</div>
+<div
+    fxFlex="none"
+    fxLayout="row"
+    fxLayoutAlign="end stretch"
+    class="footer"
+    #footer>
+    <div
+        fxLayoutAlign="center center"
+        *ngIf='!!queryTime'>
+        Query Time: {{queryTime | date:'medium'}}
+    </div>
+</div>
