@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DynamicQuestionnaireComponent } from './dynamic-questionnaire/dynamic-questionnaire.component';
 import { MainComponent } from './main/main.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 
@@ -10,11 +11,12 @@ const routes: Routes = [
     },
     {
         path: 'question',
-        component: QuestionnaireComponent,
+        // component: QuestionnaireComponent,
+        component: DynamicQuestionnaireComponent,
     },
     {
         path: '',
-        redirectTo: 'main',
+        redirectTo: 'question',
         pathMatch: 'full'
     }
 ];

@@ -1,0 +1,63 @@
+<div style="border: 1px solid black;" fxFill fxLayout="column">
+    <mat-tree #tree fxFlex [dataSource]="dataSource" [treeControl]="treeControl" class="question-tree">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+            <li class="mat-tree-node">
+                <button mat-icon-button disabled></button>
+                <section
+                    fxFlex
+                    fxLayout="row wrap"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="5px">
+                    <div>
+                        <b>{{node.linkId}}</b>
+                    </div>
+                    <div [class.sub-title]="isTopLevel(node)" fxFlex.xs fxFlex="30%">{{node.text}}</div>
+                    <div
+                        *ngIf="node.type!='group'"
+                        appearance="outline"
+                        fxFlex="60%" fxFlex.xs="100%">
+                        <mat-label style="background-color: yellow; word-wrap: break-word;">{{node['answer']}}
+                        </mat-label>
+                    </div>
+                </section>
+            </li>
+        </mat-tree-node>
+        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+            <li>
+                <div class="mat-tree-node">
+                    <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.linkId">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                    </button>
+                    <section
+                        fxFlex
+                        fxLayout="row wrap"
+                        fxLayoutAlign="start center"
+                        fxLayoutGap="5px">
+                        <div>
+                            <b>{{node.linkId}}</b>
+                        </div>
+                        <div [class.sub-title]="isTopLevel(node)">{{node.text}}</div>
+                        <div
+                            *ngIf="node.type!='group'"
+                            appearance="outline"
+                            fxFlex="60%" fxFlex.xs="100%">
+                            <mat-label style="background-color: yellow; word-wrap: break-word;">{{node['answer']}}
+                            </mat-label>
+                        </div>
+                    </section>
+                </div>
+                <ul [class.question-tree-invisible]="!treeControl.isExpanded(node)">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+            </li>
+        </mat-nested-tree-node>
+    </mat-tree>
+    <div>
+        <pre fxLayout="row wrap" style="overflow: visible;">
+        {{json | json }}
+    </pre>
+    </div>
+</div>

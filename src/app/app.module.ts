@@ -10,12 +10,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ResponseComponent } from './response/response.component';
+import { DynamicQuestionnaireComponent } from './dynamic-questionnaire/dynamic-questionnaire.component';
+import { QuestionComponent } from './question/question.component';
+import { CUSTOM_DATE_FORMATS } from './shared/custome-date-format';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionnaireComponent,
-    MainComponent
+    MainComponent,
+    ResponseComponent,
+    DynamicQuestionnaireComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule
   ],
   providers: [
-    ApiService
+    ApiService,
   ],
   bootstrap: [AppComponent]
 })

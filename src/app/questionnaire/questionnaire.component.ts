@@ -1,5 +1,6 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTree, MatTreeNestedDataSource } from '@angular/material/tree';
 import questionnaireJson from '../../assets/questionnaire.json';
 
@@ -18,6 +19,7 @@ interface QuestionNode {
 export class QuestionnaireComponent implements OnInit {
   @ViewChild('tree') tree: MatTree<QuestionNode>;
   json;
+  quesForm: FormGroup;
   dataSource = new MatTreeNestedDataSource<QuestionNode>();
   treeControl = new NestedTreeControl<QuestionNode>(node => node.item);
   hasChild = (_: number, node: QuestionNode) => !!node.item && node.item.length > 0;
@@ -27,7 +29,9 @@ export class QuestionnaireComponent implements OnInit {
     return !/\./.test(node.linkId);
   }
 
-  constructor() {
+  constructor(
+    private fb: FormBuilder
+  ) {
     this.json = Object.assign({}, questionnaireJson);
     this.dataSource.data = this.json['item'] as QuestionNode[];
     this.treeControl.dataNodes = this.json['item'];
@@ -40,5 +44,4 @@ export class QuestionnaireComponent implements OnInit {
   ngAfterViewInit() {
     this.tree.treeControl.expandAll();
   }
-
 }

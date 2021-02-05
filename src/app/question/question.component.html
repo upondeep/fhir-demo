@@ -1,0 +1,56 @@
+<form
+    fxFlex
+    fxLayout="row wrap"
+    [formGroup]="form"
+    fxLayoutAlign="start center">
+    <div
+        fxFlex
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        style="font-size: 18px;">
+        <div fxFlex="nogrow"><b>{{form.get('linkId')?.value}}</b></div>&nbsp;&nbsp;
+        <div fxFlex>{{form.get('text')?.value}}</div>
+    </div>
+    <ng-container [ngSwitch]="form.get('type')?.value">
+        <div *ngSwitchCase="'string'" fxFlex="60%" fxFlex.xs="100%">
+            <!-- <mat-form-field
+                appearance="outline"
+                fxFlex="300px"
+                fxFlex.xs="nogrow">
+                <mat-label>Answer</mat-label>
+                <input formControlName="answer" matInput type="text">
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>Select an option</mat-label>
+                <mat-select formControlName="answer">
+                    <mat-option>Select a value</mat-option>
+                    <mat-option *ngFor="let option of options" [value]="option.value">
+                        {{option.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngSwitchCase="'boolean'" fxFlex="60%" fxFlex.xs="100%">
+            <mat-radio-group formControlName="answer" fxLayout="row" fxLayoutGap="10px">
+                <mat-radio-button class="radio-margin" value="true">Yes</mat-radio-button>
+                <mat-radio-button class="radio-margin" value="false">No</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div *ngSwitchCase="'date'" fxFlex="60%" fxFlex.xs="100%">
+            <mat-form-field
+                appearance="outline"
+                fxFlex="300px"
+                fxFlex.xs="nogrow">
+                <mat-label>Choose a date</mat-label>
+                <input
+                    formControlName="answer"
+                    matInput
+                    [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div *ngSwitchDefault></div>
+    </ng-container>
+</form>

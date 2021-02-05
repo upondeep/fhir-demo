@@ -1,0 +1,8 @@
+:host {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

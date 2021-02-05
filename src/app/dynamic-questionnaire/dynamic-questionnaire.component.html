@@ -1,0 +1,41 @@
+<div fxFill fxLayout="column">
+    <form
+        fxFlex
+        fxLayout="column"
+        fxLayoutGap="10px"
+        [formGroup]="questionForm">
+        <ng-container
+            *ngTemplateOutlet="recursiveList; context:{ $implicit: questionForm.get('item')?.controls, prefix: 'item.' }">
+        </ng-container>
+    </form>
+    <div fxLayout="row">
+        <button
+            mat-raised-button
+            [disabled]="disableSubmit()"
+            (click)="onSubmit()">
+            Submit
+        </button>
+    </div>
+    <app-response [response]="responseObject"></app-response>
+    <!-- <div>
+        <pre fxLayout="row wrap" style="overflow: visible;">
+            {{questionForm.value | json}}
+        </pre>
+    </div> -->
+</div>
+
+<ng-template #recursiveList let-controls let-prefix="prefix">
+    <ng-container *ngFor="let e of controls; let i = index">
+        <app-question [form]="questionForm.get(prefix + i)">
+        </app-question>
+        <div
+            fxLayout="column"
+            fxLayoutGap="10px"
+            *ngIf="e.get('item')?.controls?.length"
+            style="padding-left: 10px;">
+            <ng-container
+                *ngTemplateOutlet="recursiveList; context:{ $implicit: e.get('item').controls, prefix: prefix + i + '.item.'  }">
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-template>
